@@ -251,7 +251,8 @@ function ProductList() {
     };
 
     const handleAddToCart = (plant) =>{
-        dispatch(addItem(plant))
+        const plantWithQuantity = { ...plant, quantity: 1 }
+        dispatch(addItem(plantWithQuantity))
         setAddedToCart((prevState)=>({
             ...prevState,[plant.name]:true,
         }))

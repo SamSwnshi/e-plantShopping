@@ -39,6 +39,23 @@ body {
    
 }
 
+.cart-count {
+    position: absolute;
+    top: 50px;
+    right: 47px;
+    /* background-color: red; */
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(50%, -50%);
+}
+
 /* Product Grid */
 .product-grid {
     display:flex;

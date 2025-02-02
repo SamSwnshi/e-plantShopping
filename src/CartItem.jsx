@@ -9,27 +9,52 @@ const CartItem = ({ onContinueShopping }) => {
 
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
- 
+    let totalAmount = cart.reduce((total, item) => {
+      const cost = Number(item.cost); // Ensure cost is a number
+      const quantity = Number(item.quantity); // Ensure quantity is a number
+      console.log(`Item: ${item.name}, Cost: ${cost}, Quantity: ${quantity}, Subtotal: ${cost * quantity}`);
+      return total + (cost * quantity);
+    }, 0);
+    return totalAmount.toFixed(2)
   };
 
-  const handleContinueShopping = (e) => {
-   
+  const handleContinueShopping = () => {
+    onContinueShopping()
   };
 
 
 
   const handleIncrement = (item) => {
+    alert("YOu have clicked Increment!")
+    dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
   };
 
   const handleDecrement = (item) => {
-   
+    if (item.quantity > 1) {
+      dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
+    } else {
+      dispatch(removeItem(item.name));
+    }
   };
 
   const handleRemove = (item) => {
+    dispatch(removeItem(item.name));
   };
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
+    const cost = Number(item.cost); // Ensure cost is a number
+    const quantity = Number(item.quantity); // Ensure quantity is a number
+
+    // Check if either is NaN and return 0 if so
+    if (isNaN(cost) || isNaN(quantity)) {
+      console.log(`Invalid cost or quantity for item: ${item.name}`);
+      return 0;
+    }
+
+    const totalCost = (cost * quantity).toFixed(2); // Return total cost
+    console.log(`Item: ${item.name}, Total Cost: $${totalCost}`);
+    return totalCost;
   };
 
   return (
